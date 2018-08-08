@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load my_customtags %}
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Form View</title>
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="{% static 'static/bootstrap.min.css' %}">
+	<script src="{% static 'static/bootstrap.min.js'%}"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+	<link href="{% static 'contact/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container-fluid">
+		<h1 id="title">Form Field</h1>
+
+		<form id="survey-form" action="{% url 'formview' %}" method="post">
+			{% csrf_token %}
+			<div class="boxcontent">
+				<p id="description">Please fill the form below.</p>
+				{{ form.non_field_errors }}
+				<div class="row">
+					<div class="col-sm-6 label_field">
+						<label id="name-label" for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+					</div>
+					<div class="col-sm-6">
+						{{form.username}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 label_field">
+						<label id="email-label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+					</div>
+					<div class="col-sm-6">
+						{{form.email}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 label_field ">
+						<label id="number-label" for="{{ form.age.id_for_label }}">{{ form.age.label }}</label>
+					</div>
+					<div class="col-sm-6 ">
+						{{form.age}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 label_field ">
+						<label for="{{ form.currentPos.id_for_label }}">{{form.currentPos.label}}</label>
+					</div>
+					<div class="col-sm-6 ">
+						{{form.currentPos}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6  label_field">
+						<label for="{{ form.gender.id_for_label }}">{{form.gender.label}}</label>
+					</div>
+					<div class="col-sm-6 " class="gender">
+						{% for radio in form.gender %}
+							{{radio}}<br>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 label_field">
+						<label for="current_field">Programming Language you know:</label>
+					</div>
+					<div class="col-sm-6">
+						{% for checkbox in form.languageProficient %}
+							{{checkbox}}<br>
+						{% endfor %}
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-6 label_field">
+						<label for="current_field">Address:</label>
+					</div>
+					<div class="col-sm-6">
+						{{form.address}}
+					</div>
+				</div>
+
+				<div class="button_field">
+					<button id="submit" type="submit" name="button" class="btn btn-danger">Submit</button>
+				</div>
+			</div>
+		</form>
+
+
+	</div>
+
+	</div>
+</body>
+
+</html>
