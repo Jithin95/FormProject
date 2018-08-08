@@ -48,7 +48,6 @@ class FormView(forms.ModelForm):
                               widget= forms.Textarea(attrs= {'class':'address', 'placeholder':'Address'}))
     image = forms.ImageField()
 
-
     class Meta:
         model = SurveyModel
         fields = ('username', 'email', 'age', 'currentPos', 'gender', 'languageProficient', 'address','image',)
